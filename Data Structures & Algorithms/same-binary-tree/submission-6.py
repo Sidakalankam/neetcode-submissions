@@ -1,0 +1,47 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        """
+        def dfs(node, res):
+            if not node:
+                res.append(None)
+                return None
+
+            res.append(node.val)
+            
+            dfs(node.left, res)
+            dfs(node.right, res)
+
+            return res
+        stack1 = []
+        stack2 = []
+
+        stack1 = dfs(p, stack1)
+        stack2 = dfs(q, stack2)
+
+        return stack1 == stack2
+        """
+        if not p and not q:
+            return True
+        elif (p and not q) or (q and not p):
+            return False
+        else:
+            if p.val == q.val:
+                return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+            else: 
+                return False
+
+        
+
+
+            
+
+
+
+        

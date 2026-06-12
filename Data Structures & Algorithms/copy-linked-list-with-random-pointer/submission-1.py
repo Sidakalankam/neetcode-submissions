@@ -1,0 +1,69 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+"""
+
+class Solution:
+    
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        '''
+        if not head:
+            return None
+
+        curr = head
+
+        while curr:
+            newNode = Node(curr.val)
+            newNode.next = curr.next
+            curr.next = newNode
+            curr = newNode.next
+
+        curr = head
+
+        while curr:
+            if curr.random:
+                curr.next.random = curr.random.next
+            curr = curr.next.next
+        
+        curr = head
+        newHead = head.next
+        while curr:
+            copy = curr.next
+            curr.next = copy.next
+            if copy.next:
+                copy.next = copy.next.next
+            curr = curr.next
+
+        return newHead
+        '''
+
+        if not head: 
+            return None
+        curr = head
+        oldToNew = {}
+
+        while curr:
+            node = Node(curr.val)
+            oldToNew[curr] = node
+            curr = curr.next
+        
+        curr = head
+
+        while curr:
+            newNode = oldToNew[curr]
+            newNode.next = oldToNew[curr.next] if curr.next else None
+            newNode.random = oldToNew[curr.random] if curr.random else None
+            curr = curr.next
+
+        return oldToNew[head]
+
+
+
+            
+
+
+        
